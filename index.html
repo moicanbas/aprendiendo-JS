@@ -1,0 +1,57 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <h1 id="name"></h1>
+        <img id="imagen" src="" alt="Imagen de rick and morty">
+    </main>
+    <script>
+        async function getData() {
+            const url = "https://rickandmortyapi.com/api/character/1";
+            try {
+                const response = await fetch(url);
+                console.log('respuesta server:',response)
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+
+                const json = await response.json();
+                document.getElementById("name").innerText = json.name
+                document.getElementById("imagen").src = json.image
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+        getData()
+    </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="obtenerUsuariosActivos()">Llamar funcion</button>
+    <ul id="my-list">
+        <li>Item 1</li>
+    </ul>
+
+    <script src="/conexiones.js"></script>
+</body>
+
+</html>

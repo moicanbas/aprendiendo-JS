@@ -1,0 +1,151 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "Ana",
+      "edad": 28,
+      "email": "ana@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "2",
+      "nombre": "Luis",
+      "edad": 34,
+      "email": "luis@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "3",
+      "nombre": "María",
+      "edad": 22,
+      "email": "maria@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "4",
+      "nombre": "Carlos",
+      "edad": 30,
+      "email": "carlos@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "5",
+      "nombre": "Sofía",
+      "edad": 25,
+      "email": "sofia@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "6",
+      "nombre": "Pedro",
+      "edad": 40,
+      "email": "pedro@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "7",
+      "nombre": "Lucía",
+      "edad": 19,
+      "email": "lucia@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "8",
+      "nombre": "David",
+      "edad": 33,
+      "email": "david@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "9",
+      "nombre": "Paula",
+      "edad": 29,
+      "email": "paula@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "10",
+      "nombre": "Jorge",
+      "edad": 26,
+      "email": "jorge@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "11",
+      "nombre": "Andrea",
+      "edad": 27,
+      "email": "andrea@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "12",
+      "nombre": "Miguel",
+      "edad": 36,
+      "email": "miguel@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "13",
+      "nombre": "Valentina",
+      "edad": 23,
+      "email": "valentina@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "14",
+      "nombre": "Rodrigo",
+      "edad": 31,
+      "email": "rodrigo@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "15",
+      "nombre": "Martina",
+      "edad": 24,
+      "email": "martina@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "16",
+      "nombre": "Hugo",
+      "edad": 37,
+      "email": "hugo@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "17",
+      "nombre": "Elena",
+      "edad": 32,
+      "email": "elena@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "18",
+      "nombre": "Tomás",
+      "edad": 28,
+      "email": "tomas@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "19",
+      "nombre": "Camila",
+      "edad": 21,
+      "email": "camila@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "20",
+      "nombre": "Lucas",
+      "edad": 35,
+      "email": "lucas@mail.com",
+      "is_active": true
+    },
+    {
+      "id": "c48a",
+      "nombre": "Nora",
+      "edad": 27,
+      "email": "nora@mail.com",
+      "is_active": true
+    }
+  ]
+}
