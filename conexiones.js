@@ -1,30 +1,36 @@
-async function crearUsuario(usuario) {
+
+async function crearUsuario(event) {
+    event.preventDefault();
+
+    const form = new FormData(document.getElementById("formulario"))
+
     try {
+        form.append("is_active", true)
+
+        let object = {};
+        form.forEach((value, key) => object[key] = value);
+
         const response = await fetch('http://localhost:3000/usuarios', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...usuario, is_active: true })
+            body: JSON.stringify(object)
         });
 
         const nuevoUsuario = await response.json();
         alert('Usuario creado:', nuevoUsuario);
+        // obtenerUsuariosActivos()
     } catch (error) {
         console.error('Error al crear usuario:', error);
     }
 }
 
-// Ejemplo de uso:
-crearUsuario({ nombre: 'Nora', edad: 27, email: 'nora@mail.com' });
-
 async function obtenerUsuariosActivos() {
     try {
-        const response = await fetch('http://localhost:3000/usuarios?is_active=true');
+        const response = await fetch(`http://localhost:3000/usuarios?is_active=true`);
         const usuariosActivos = await response.json();
-        
+
         usuariosActivos.forEach(element => {
-            
             const li = document.createElement("li");
-            // li.innerText = JSON.stringify(element);
             li.innerText = `${element.nombre} ${element.edad} ${element.email}`
             document.getElementById("my-list").appendChild(li);
         });
@@ -34,7 +40,9 @@ async function obtenerUsuariosActivos() {
     }
 }
 
-
+document.addEventListener("DOMContentLoaded", function () {
+    obtenerUsuariosActivos()
+});
 
 // Enunciado para desarrollar métodos adicionales
 // 🧾 GET /usuarios/:id (getById solo si está activo)
