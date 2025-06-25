@@ -1,23 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Usuarios</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    button {
+      margin-right: 0.5rem;
+    }
+  </style>
 </head>
 
 <body>
-    <form id="formulario" onsubmit="crearUsuario(event)">
-        <input type="text" name="nombre" placeholder="nombre" required>
-        <input type="number" name="edad" placeholder="edad" required>
-        <input type="email" name="email" placeholder="email" required>
+  <main>
+    <div class="form-container">
+      <form id="formulario">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="number" name="edad" placeholder="Edad" required>
+        <input type="email" name="email" placeholder="Email" required>
         <button type="submit">Guardar</button>
-    </form>
-    <ul id="my-list">
-    </ul>
+      </form>
+    </div>
 
-    <script src="/conexiones.js"></script>
+    <table id="tabla-usuarios">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Email</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <script>
+    const apiUrl = 'http://localhost:3000/usuarios';
+
+    document.getElementById("formulario").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const form = new FormData(this);
+      const data = Object.fromEntries(form.entries());
+      data.is_active = true;
+
+      try {
+        await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        this.reset();
+        await cargarUsuarios();
+      } catch (err) {
+        console.error("Error al crear usuario:", err);
+      }
+    });
+
+    async function cargarUsuarios() {
+      try {
+        const response = await fetch(`${apiUrl}?is_active=true`);
+        const usuarios = await response.json();
+        const tbody = document.querySelector("#tabla-usuarios tbody");
+        tbody.innerHTML = "";
+
+        usuarios.forEach(usuario => {
+          const fila = document.createElement("tr");
+
+          fila.innerHTML = `
+            <td>${usuario.nombre}</td>
+            <td>${usuario.edad}</td>
+            <td>${usuario.email}</td>
+            <td>
+              <button onclick="editarUsuario(${usuario.id}, this)">Editar</button>
+              <button onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
+            </td>
+          `;
+
+          tbody.appendChild(fila);
+        });
+      } catch (err) {
+        console.error("Error al cargar usuarios:", err);
+      }
+    }
+
+    async function eliminarUsuario(id) {
+      const confirmar = confirm("¿Estás seguro de eliminar este usuario?");
+      if (!confirmar) return;
+
+      try {
+        await fetch(`${apiUrl}/${id}`, { method: "DELETE" });
+        await cargarUsuarios();
+      } catch (err) {
+        console.error("Error al eliminar usuario:", err);
+      }
+    }
+
+    async function editarUsuario(id, boton) {
+      const fila = boton.closest("tr");
+      const [tdNombre, tdEdad, tdEmail] = fila.children;
+
+      const nombre = prompt("Editar nombre:", tdNombre.textContent);
+      const edad = prompt("Editar edad:", tdEdad.textContent);
+      const email = prompt("Editar email:", tdEmail.textContent);
+
+      if (!nombre || !edad || !email) {
+        alert("Todos los campos son requeridos.");
+        return;
+      }
+
+      const usuarioEditado = { nombre, edad, email, is_active: true };
+
+      try {
+        await fetch(`${apiUrl}/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(usuarioEditado)
+        });
+        await cargarUsuarios();
+      } catch (err) {
+        console.error("Error al editar usuario:", err);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", cargarUsuarios);
+  </script>
 </body>
 
 </html>
